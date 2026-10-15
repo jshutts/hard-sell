@@ -77,6 +77,8 @@ button:focus-visible{outline:3px solid var(--cyan);outline-offset:2px}
 #tabs{display:flex;gap:4px;flex-wrap:wrap}
 .tab{flex:1;background:#0c0718;border:2px solid var(--dim);font-size:9px;padding:7px 2px;min-width:52px}
 .tab.on{border-color:var(--neon);color:var(--neon)}
+.rtab{flex:1.4}
+.opt.reply{color:var(--ink)}
 .tab:disabled{opacity:.35}
 #opts{overflow:auto;display:flex;flex-direction:column;gap:4px;min-height:0}
 .opt{font-family:var(--term);font-size:21px;text-align:left;background:none;border:2px solid transparent;padding:3px 8px;line-height:1.05;display:flex;gap:8px;justify-content:space-between}
@@ -89,6 +91,70 @@ button:focus-visible{outline:3px solid var(--cyan);outline-offset:2px}
 .cat.on{border-color:var(--cyan);color:var(--cyan)}
 .hint{color:var(--dim);font-size:18px;padding:2px 8px}
 
+
+/* ---- side quests & bosses ---- */
+#quest{position:fixed;inset:0;z-index:18;background:var(--night);display:grid;grid-template-rows:auto auto minmax(0,1fr);gap:8px;padding:calc(8px + env(safe-area-inset-top,0px)) 10px calc(8px + env(safe-area-inset-bottom,0px));max-width:1000px;margin:0 auto}
+#quest.boss{background:radial-gradient(circle at 50% 0,#3a0f22,var(--night) 60%)}
+#qTop{display:grid;grid-template-columns:1fr auto;gap:4px 10px;align-items:center;font-family:var(--pix);font-size:11px;color:var(--cyan)}
+#quest.boss #qTop{color:#ff5a5a}
+#qTime{color:var(--amber);font-size:13px}
+#qTime.hit{animation:hit .5s}
+@keyframes hit{30%{color:#ff5a5a;transform:scale(1.3)}}
+#qTimer{grid-column:1/-1;height:10px;border:2px solid var(--ink);background:#0c0718}
+#qTimer i{display:block;height:100%;background:var(--lime);width:100%}
+#qTimer.low i{background:#ff5a5a;animation:blink .5s steps(2) infinite}
+#qTalk{display:grid;grid-template-columns:auto 1fr minmax(120px,240px);gap:10px;align-items:center;background:#0c0718;border:3px solid var(--ink);padding:6px 8px}
+#qFace{width:86px;height:67px;image-rendering:pixelated;border:2px solid #3a2a60}
+#qWho{font-family:var(--pix);font-size:9px;color:var(--neon);margin-bottom:4px}
+#qLine{font-size:21px;line-height:1.1}
+#qLine.flash{animation:fl .4s}
+@keyframes fl{from{color:var(--cyan)}}
+#qMeters{display:flex;flex-direction:column;gap:6px}
+#qBody{overflow:auto;background:var(--panel);border:3px solid #3a2a60;padding:8px;display:flex;flex-direction:column;gap:8px;min-height:0}
+.spec{display:flex;flex-wrap:wrap;gap:4px 16px;background:#0c0718;border:2px solid var(--cyan);padding:6px 10px;font-size:20px}
+.spec b{color:var(--ink);font-weight:400}
+.rule{color:var(--dim);font-size:18px}
+.grid{display:grid;gap:6px}
+.chargers{grid-template-columns:repeat(auto-fill,minmax(112px,1fr))}
+.cases{grid-template-columns:repeat(auto-fill,minmax(130px,1fr))}
+.qcard{font-family:var(--term);font-size:17px;line-height:1.05;background:#0c0718;border:2px solid #4a3a70;padding:6px;display:flex;flex-direction:column;gap:2px;align-items:flex-start;text-align:left}
+.qcard:hover{border-color:var(--cyan)}
+.qcard .big{font-size:22px;color:var(--ink)}
+.qcard .port{color:#0c0718;padding:0 4px;font-size:16px}
+.qcard .ok{color:var(--lime)}.qcard .warn{color:#ff8a5a}
+.qcard .brand{color:var(--dim);font-size:15px}
+.qcard.bad{border-color:#ff5a5a;opacity:.35}.qcard.good{border-color:var(--lime);background:#16301a}.qcard.meh{border-color:var(--amber)}
+.caseart{display:grid;place-items:center;width:28px;height:44px;border-radius:6px;border:2px solid #000;font-style:normal;color:#fff;font-size:12px;text-shadow:0 0 2px #000}
+.sw{display:inline-block;width:12px;height:12px;border:1px solid #fff;margin:0 3px 0 6px;vertical-align:middle}
+.convince{background:#0c0718;border:2px solid var(--amber);padding:6px;display:flex;flex-direction:column;gap:4px}
+.phone{align-self:center;width:min(300px,100%);aspect-ratio:9/16;max-height:100%;background:#111;border:6px solid #2a2a33;border-radius:22px;padding:8px;position:relative}
+.phone.glitch{animation:glitch .18s steps(2) infinite}
+@keyframes glitch{0%{transform:translate(2px,-1px);filter:hue-rotate(90deg)}50%{transform:translate(-2px,1px);filter:none}100%{transform:translate(1px,2px);filter:invert(.15)}}
+.pscreen{position:relative;width:100%;height:100%;background:linear-gradient(#3a6ad0,#9a5ad0);border-radius:12px;overflow:hidden}
+.apps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:4px;padding:8px 4px}
+.app{min-width:0}
+.app{background:none;border:2px solid transparent;border-radius:8px;padding:2px;display:flex;flex-direction:column;align-items:center;font-family:var(--term);color:#fff;text-shadow:1px 1px 0 #000}
+.app .ai{font-size:24px;line-height:1}.app .an{font-size:12px;line-height:1;max-width:100%;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;text-align:center;word-break:break-word}
+.app.sel{border-color:#fff;background:#fff3}
+.ubar{position:absolute;left:0;right:0;bottom:0;background:#0c0718ee;padding:6px;display:flex;gap:6px;align-items:center;font-size:16px;flex-wrap:wrap}
+.ubar span{flex:1;min-width:0}
+.ub{font-size:8px;padding:6px;background:#3a2a60;border:2px solid var(--ink)}.ub.del{background:#c02a2a}
+.pop-ad{position:absolute;width:58%;padding:16px 6px 6px;border:2px solid #000;box-shadow:3px 3px 0 #000;color:#000;font-family:var(--term);font-size:15px;line-height:1;text-align:center;z-index:2}
+.px{position:absolute;top:1px;right:2px;background:#000;color:#fff;border:none;font-size:9px;padding:3px 5px}
+.px.tiny{font-size:6px;padding:1px 2px;opacity:.6}
+.pbtn{margin-top:4px;font-size:8px;background:#c02a2a;color:#fff;border:2px solid #000;padding:4px}
+.acts{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:4px}
+.opt.danger{color:#ff8a8a}
+.notes{background:#0c0718;border:2px solid var(--amber);padding:6px 8px;font-size:19px;line-height:1.1}
+.texts{display:flex;flex-direction:column;gap:4px;align-items:flex-start}
+.bubble{background:#1d6a3a;padding:4px 10px;border-radius:12px 12px 12px 2px;font-size:18px}
+@media (max-width:820px),(max-height:520px){
+  #qTalk{grid-template-columns:auto 1fr;padding:4px 6px}#qMeters{grid-column:1/-1}
+  #qFace{width:64px;height:50px}#qLine{font-size:18px}
+  .acts{grid-template-columns:1fr}.opt{font-size:17px}
+  .chargers{grid-template-columns:repeat(auto-fill,minmax(96px,1fr))}.cases{grid-template-columns:repeat(auto-fill,minmax(110px,1fr))}
+  .phone{width:min(250px,100%)}
+}
 #fileMini{display:none}
 .sl{display:none}
 #fileClose{display:none}
@@ -179,7 +245,8 @@ button:focus-visible{outline:3px solid var(--cyan);outline-offset:2px}
   </div>
   <div id="menu">
     <div id="tabs">
-      <button class="tab on" data-tab="ask">ASK</button>
+      <button class="tab on rtab" data-tab="reply">💬 REPLY</button>
+      <button class="tab" data-tab="ask">ASK</button>
       <button class="tab" data-tab="pitch">PITCH</button>
       <button class="tab" data-tab="chat">CHAT</button>
       <button class="tab" data-tab="deal">DEAL</button>
@@ -196,6 +263,7 @@ button:focus-visible{outline:3px solid var(--cyan);outline-offset:2px}
     <p>You sell phones at the mall. Every customer wants something different, and most of them don't know what it is yet.</p>
     <div class="how">
       ▸ <b>ASK</b> questions to find out what they need. Ask too many and they get annoyed.<br>
+      ▸ <b>💬 REPLY</b> gives you a few natural follow-ups to whatever they just said. Use the other tabs to change the subject.<br>
       ▸ <b>PITCH</b> products that solve their problems. Pitch random junk and their patience drops.<br>
       ▸ <b>CHAT</b> to build rapport. Some people love it. Some people hate it.<br>
       ▸ <b>CLOSE</b> when the BUY meter is high. Too early and they "need to think about it."<br>
@@ -204,6 +272,11 @@ button:focus-visible{outline:3px solid var(--cyan);outline-offset:2px}
     <button class="btn" id="startBtn">CLOCK IN</button>
     <p id="bestLine" style="font-size:18px;color:var(--dim)"></p>
   </div>
+</div>
+<div id="quest" hidden>
+  <div id="qTop"><span id="qTitle"></span><span id="qTime"></span><div id="qTimer"><i></i></div></div>
+  <div id="qTalk"><canvas id="qFace" width="72" height="56"></canvas><div class="qsay"><div id="qWho"></div><div id="qLine"></div></div><div id="qMeters"></div></div>
+  <div id="qBody"></div>
 </div>
 <div class="overlay" id="summary" hidden><div class="card" id="summaryCard"></div></div>
 
@@ -489,9 +562,9 @@ const DEAL_POS=['Ooh. Now we\'re talking.','A discount? You\'re my favorite pers
 let G=null,C=null,best=0,muted=false;
 try{best=+localStorage.getItem('hardsell-best')||0}catch(e){}
 const CUST_PER_DAY=5;
-const quotaFor=d=>2200+(d-1)*900;
+const quotaFor=d=>2000+(d-1)*800;
 function newGame(){G={day:1,idx:0,sales:0,daySales:0,strikes:0,deals:2,log:[],totalSold:0,served:0,sold:0};startDay()}
-function startDay(){G.idx=0;G.daySales=0;G.deals=2;G.log=[];updateTop();nextCustomer()}
+function startDay(){G.idx=0;G.daySales=0;G.deals=2;G.log=[];G.plan=planDay(G.day);updateTop();nextCustomer()}
 function weightedNeeds(p){
   const bag=[];for(const [k,w] of Object.entries(p.needs))for(let i=0;i<w;i++)bag.push(k);
   const n=Math.random()<.35?3:2,out=new Set();let guard=0;while(out.size<n&&guard++<50)out.add(pick(bag));
@@ -514,10 +587,11 @@ function makeCustomer(){
 // =====================================================================
 function nextCustomer(){
   G.idx++;if(G.idx>CUST_PER_DAY){endDay();return}
+  G.curType=G.plan?G.plan[G.idx-1]:'sale';if(G.curType!=='sale'){startQuest(G.curType);return}
   C=makeCustomer();updateTop();renderFile();
   scene.enter=0;$('meters').hidden=true;setMenuEnabled(false);
   say('',`*The door chimes. ${C.name} walks in holding ${C.old}.*`,'');
-  setTimeout(()=>{$('meters').hidden=false;updateMeters();say('',pick(C.p.hi),C.name);sfx.chime();setMenuEnabled(true);setTab('ask')},1300);
+  setTimeout(()=>{$('meters').hidden=false;updateMeters();say('',pick(C.p.hi),C.name);sfx.chime();setMenuEnabled(true);C.last={kind:'hello'};setTab('reply')},1300);
 }
 function act(fn){if(!C||C.done||busy)return;C.turn++;fn();updateMeters();renderFile();if(!C.done){checkEnd();renderMenu()}}
 function changeBuy(d){const before=C.buy;C.buy=clamp(C.buy+d,0,100);popMeter('buyBar',Math.round(C.buy-before),'#9bf55a')}
@@ -635,7 +709,7 @@ function endDay(){
 // =====================================================================
 // UI
 // =====================================================================
-let tab='ask',pitchCat='PHONES',busy=false,typeTimer=null,menuOn=true;
+let tab='reply',pitchCat='PHONES',busy=false,typeTimer=null,menuOn=true;
 function say(you,line,who){
   $('you').textContent=you?'YOU: '+you:'';$('who').textContent=who?who.toUpperCase():'MEGABARS WIRELESS';
   clearInterval(typeTimer);const el=$('line');el.textContent='';let i=0;$('more').hidden=true;scene.talk=1;
@@ -660,6 +734,7 @@ function rollChats(){chatPool=shuffle(CHATS).slice(0,3).map(c=>({c,you:pick(c.yo
 function renderMenu(){
   const box=$('opts');box.innerHTML='';
   if(!C||!menuOn){box.innerHTML='<div class="hint">...</div>';return}
+  if(tab==='reply'){renderReplies(box,(l,m,f,d)=>{const b=document.createElement('button');b.className='opt';b.disabled=!!d;b.innerHTML=`<span><span class="n">▸</span> ${esc(l)}</span><span class="meta">${esc(m||'')}</span>`;b.addEventListener('click',()=>{initAudio();f()});box.appendChild(b);return b});return}
   const opt=(label,meta,fn,dis)=>{const b=document.createElement('button');b.className='opt';b.disabled=!!dis;b.innerHTML=`<span><span class="n">▸</span> ${esc(label)}</span><span class="meta">${esc(meta||'')}</span>`;b.addEventListener('click',()=>{initAudio();fn()});box.appendChild(b);return b};
   if(tab==='ask'){if(C.turnRolledQ!==C.turn){rollQuestions();C.turnRolledQ=C.turn}
     if(C.qCount>=4)box.insertAdjacentHTML('beforeend',`<div class="hint">${C.qCount} questions asked. They're getting tired of questions.</div>`);
@@ -695,17 +770,17 @@ $('fileClose').addEventListener('click',()=>$('file').classList.remove('open'));
 function updateMeters(){if(!C)return;$('buyBar').firstElementChild.style.width=C.buy+'%';$('patBar').firstElementChild.style.width=(C.pat/C.patMax*100)+'%';$('patBar').classList.toggle('low',C.pat/C.patMax<.3);
   scene.mood=C.pat/C.patMax<.3?'angry':C.buy>70?'happy':C.pat/C.patMax<.55?'annoyed':'neutral'}
 function popMeter(id,d,col){if(!d)return;const s=document.createElement('span');s.className='pop';s.style.color=d>0?col:'#ff5a5a';s.textContent=(d>0?'+':'')+d;$(id).appendChild(s);setTimeout(()=>s.remove(),1100)}
-function updateTop(){if(!G)return;$('day').textContent=G.day;$('cust').textContent=`${Math.min(G.idx,CUST_PER_DAY)}/${CUST_PER_DAY}`;$('sales').textContent=money(G.daySales);$('quota').textContent=money(quotaFor(G.day));
+function updateTop(){if(!G)return;$('day').textContent=G.day;$('cust').textContent=`${Math.min(G.idx,CUST_PER_DAY)}/${CUST_PER_DAY}`+(G.curType&&G.curType!=='sale'?(QUEST_INFO[G.curType].boss?' ☠BOSS':' ⚡QUEST'):'');$('sales').textContent=money(G.daySales);$('quota').textContent=money(quotaFor(G.day));
   $('quotaBar').firstElementChild.style.width=clamp(G.daySales/quotaFor(G.day)*100,0,100)+'%';$('strikes').textContent='✕'.repeat(G.strikes)+'○'.repeat(3-G.strikes)}
 addEventListener('keydown',e=>{if(!$('summary').hidden){if(e.key==='Enter'||e.key===' '){e.preventDefault();const b=$('nextBtn');b&&b.click()}return}
   if(!$('title').hidden)return;const k=e.key.toLowerCase();
-  const tabs={a:'ask',p:'pitch',c:'chat',d:'deal',x:'close'};if(tabs[k]&&menuOn){setTab(tabs[k]);return}
+  const tabs={r:'reply',a:'ask',p:'pitch',c:'chat',d:'deal',x:'close'};if(tabs[k]&&menuOn){setTab(tabs[k]);return}
   if(/^[1-9]$/.test(k)){const b=[...document.querySelectorAll('#opts .opt')][+k-1];if(b&&!b.disabled)b.click()}});
 
 // =====================================================================
 // PIXEL SCENE
 // =====================================================================
-const cv=$('scene'),g=cv.getContext('2d');g.imageSmoothingEnabled=false;
+const cv=$('scene');let g=cv.getContext('2d');g.imageSmoothingEnabled=false;
 const scene={enter:1,talk:0,mood:'neutral',leaving:-1,cash:0,t:0};
 const SKIN=['#f2c9a0','#e0ac7e','#c68a5a','#9a6440','#6e4426','#f7d9bd'];
 const HAIRC=['#2a1a10','#5a3a1a','#c49a4a','#8a2a1a','#111111','#d8d0c0','#e86a9a','#3a6ad0'];
@@ -837,6 +912,438 @@ renderMenu();
 let last=performance.now();
 function frame(now){const dt=Math.min(.05,(now-last)/1000);last=now;drawScene(dt);requestAnimationFrame(frame)}
 requestAnimationFrame(frame);
+</script>
+<script>
+'use strict';
+// =====================================================================
+// REPLY: context-aware follow-ups after every customer response
+// =====================================================================
+const priceMeta=i=>i.trade?'credit':i.monthly?money(i.price)+'/mo':money(i.price);
+function bestFor(need,n=2){
+  const sameTypeTaken=i=>['phone','plan'].includes(i.type)&&C.cart.some(c=>c.type===i.type);
+  return CATALOG.filter(i=>i.tags.includes(need)&&!C.cart.some(c=>c.id===i.id)&&!C.rejected.has(i.id)&&!sameTypeTaken(i))
+    .map(i=>({i,s:i.tags.filter(t=>C.revealed.has(t)).length*3+(C.budgetKnown?(i.tier<=C.budget?2:-3):(i.tier===2?1:0))+(i.type==='phone'?1:0)+Math.random()*.6}))
+    .sort((a,b)=>b.s-a.s).slice(0,n).map(x=>x.i);
+}
+function unaskedNeeds(k){return shuffle(Object.keys(Q).filter(n=>!C.revealed.has(n)&&!C.ruled.has(n)&&Q[n].q.some(t=>!C.asked.has(t)))).slice(0,k)}
+const PITCH_SAY=[n=>`Then you'll love the ${n}.`,n=>`For that, I'd go with the ${n}.`,n=>`Let me show you the ${n}.`,n=>`You know what fixes that? The ${n}.`];
+const UPSELL_SAY=[n=>`That pairs really well with the ${n}.`,n=>`Most people grab the ${n} with that.`,n=>`Want to go all in? Add the ${n}.`];
+function buildReplies(){
+  const L=C.last||{kind:'hello'},R=[];
+  const addAsk=(need,label)=>{let q;
+    if(need==='reason'){if(C.asked.size)return;q={need:'reason',text:pick(GENERIC_Q[0].q),free:true}}
+    else if(need==='budget'){if(C.budgetKnown)return;q={need:'budget',text:pick(GENERIC_Q[1].q)}}
+    else{const t=Q[need].q.find(t=>!C.asked.has(t));if(!t)return;q={need,text:t}}
+    R.push({t:label||q.text,meta:need==='budget'?'budget':'ask',fn:()=>ask(q)})};
+  const addPitch=(i,say)=>{if(!i||R.some(r=>r.item===i))return;R.push({t:(say||pick(PITCH_SAY))(i.name),meta:priceMeta(i),item:i,fn:()=>pitch(i)})};
+  const addClose=()=>{if(!C.cart.length||R.some(r=>r.close))return;const odds=C.buy>=80?'great':C.buy>=60?'good':C.buy>=40?'risky':'bad';R.push({t:pick(CLOSE_YOU),meta:'close · '+odds,close:1,fn:tryClose})};
+  const addProbe=t=>R.push({t,meta:'dig deeper',fn:probe});
+  const addChat=()=>{const ch=pick(CHATS),y=pick(ch.you).replace('{thing}',C.looks.thing);R.push({t:y,meta:'chat',fn:()=>chat(ch,y)})};
+  const addDeal=t=>{if(G.deals>0&&!C.discount)R.push({t,meta:`deal · ${G.deals} left`,fn:deal})};
+  const rev=[...C.revealed];
+  switch(L.kind){
+    case 'hello':addAsk('reason');addAsk('budget');addChat();break;
+    case 'reason':case 'askYes':
+      if(L.need&&L.need!=='none')bestFor(L.need,2).forEach(i=>addPitch(i));
+      addProbe(pick(['What else bugs you about your phone?','Anything else you wish it did better?','Got it. What else should I know?']));
+      if(!R.length||Math.random()<.5)addAsk('budget');break;
+    case 'askNo':unaskedNeeds(2).forEach(n=>addAsk(n));if(rev.length)addPitch(bestFor(pick(rev),1)[0]);break;
+    case 'budget':shuffle(rev).slice(0,2).forEach(n=>addPitch(bestFor(n,1)[0]));if(R.length<2)unaskedNeeds(2-R.length).forEach(n=>addAsk(n));break;
+    case 'pitchYes':{
+      const ups=[...new Set(rev.flatMap(n=>bestFor(n,3)))].filter(i=>i!==L.item&&['acc','svc','addon','plan'].includes(i.type));
+      if(ups.length)addPitch(ups[0],pick(UPSELL_SAY));
+      addClose();addProbe('Anything else on your wish list?');break}
+    case 'pitchNo':case 'dup':
+      addProbe(pick(['Fair enough. Let me back up. What matters most to you?','Got it. Tell me what\'s really bugging you about your phone.']));
+      unaskedNeeds(1).forEach(n=>addAsk(n));if(rev.length)addPitch(bestFor(pick(rev),1)[0]);break;
+    case 'pricey':{
+      const it=L.item;
+      const cheaper=CATALOG.filter(i=>i.price<it.price&&i.type===it.type&&i.tags.some(t=>it.tags.includes(t)&&C.needs.includes(t))&&!C.cart.some(c=>c.id===i.id)&&!C.rejected.has(i.id)).sort((a,b)=>b.price-a.price)[0];
+      if(cheaper)addPitch(cheaper,n=>`Totally fair. The ${n} does the same job for less.`);
+      if(!C.cart.some(c=>c.id==='trade')&&!C.rejected.has('trade'))addPitch(CATALOG.find(i=>i.id==='trade'),()=>'We can knock a big chunk off with a trade-in.');
+      addDeal('Let me see what I can do on price... 10% off.');addAsk('budget');break}
+    case 'closeFail':addProbe(pick(['Totally fair. What\'s holding you back?','What would make this an easy yes for you?']));addDeal('If I take 10% off, does that help?');addChat();break;
+    case 'closeEmpty':shuffle(rev).slice(0,2).forEach(n=>addPitch(bestFor(n,1)[0]));if(!rev.length){addAsk('reason');unaskedNeeds(1).forEach(n=>addAsk(n))}break;
+    case 'chat':case 'deal':case 'probeNone':
+      addAsk('reason',pick(['So, what brings you in today?','Anyway! What can I help you with?']));
+      if(rev.length)addPitch(bestFor(pick(rev),1)[0]);addClose();if(R.length<2)unaskedNeeds(1).forEach(n=>addAsk(n));break;
+  }
+  if(C.buy>=70)addClose();
+  if(R.length<2)unaskedNeeds(2-R.length).forEach(n=>addAsk(n));
+  return R.slice(0,4);
+}
+// a conversational follow-up that digs for a hidden need without feeling like a survey
+function probe(){
+  act(()=>{
+    C.qCount++;const cost=2+Math.max(0,C.qCount-4)*4;const hidden=C.needs.filter(n=>!C.revealed.has(n));let line;
+    if(hidden.length){const n=pick(hidden);C.revealed.add(n);line=pick(['Honestly? ','Well... ','If I\'m being honest, ','Now that you mention it... '])+HATE[n];changeBuy(5);C.last={kind:'askYes',need:n}}
+    else if(!C.budgetKnown){C.budgetKnown=true;line='Mostly the price. '+pick(BUDGET_A[C.budget]);C.last={kind:'budget'}}
+    else{line=pick(['I think that\'s everything. You know me better than my therapist now.','That\'s it. That\'s the list.','Nope, that\'s all. Can we get to the part where I buy something?']);C.last={kind:'probeNone'}}
+    changePat(-cost);say(C._probeText||'Anything else I should know?',line,C.name);sfx.blip();
+  });
+}
+function renderReplies(box,opt){
+  if(C.repTurn!==C.turn){C.reps=buildReplies();C.repTurn=C.turn}
+  box.insertAdjacentHTML('beforeend','<div class="hint">Respond to what they just said, or use the tabs to change the subject.</div>');
+  C.reps.forEach(r=>{const b=opt('“'+r.t+'”',r.meta,()=>{C._probeText=r.t;r.fn()});b.classList.add('reply')});
+}
+// wrap the core actions so each one records what just happened, then flips back to REPLY
+(function(){
+  const snap=()=>({rev:new Set(C.revealed),cart:C.cart.length,rej:new Set(C.rejected)});
+  const after=()=>{if(C&&!C.done&&menuOn){C.repTurn=-1;setTab('reply')}};
+  const _ask=ask,_pitch=pitch,_chat=chat,_deal=deal,_close=tryClose,_probe=probe;
+  ask=function(q){const s=snap();_ask(q);if(!C||C.done)return;const nr=[...C.revealed].filter(n=>!s.rev.has(n));
+    C.last=q.need==='reason'?{kind:'reason',need:nr[0]||C.reasonNeed}:q.need==='budget'?{kind:'budget'}:nr.length?{kind:'askYes',need:nr[0]}:{kind:'askNo',need:q.need};after()};
+  pitch=function(i){const s=snap(),same=['phone','plan'].includes(i.type)&&C.cart.some(c=>c.type===i.type);_pitch(i);if(!C||C.done)return;
+    C.last=C.cart.length>s.cart?{kind:'pitchYes',item:i}:same?{kind:'dup',item:i}:C.rejected.has(i.id)?{kind:'pitchNo',item:i}:{kind:'pricey',item:i};after()};
+  chat=function(c,y){_chat(c,y);if(!C||C.done)return;C.last={kind:'chat'};after()};
+  deal=function(){_deal();if(!C||C.done)return;C.last={kind:'deal'};after()};
+  tryClose=function(){const had=C.cart.length;_close();if(!C||C.done)return;C.last={kind:had?'closeFail':'closeEmpty'};after()};
+  probe=function(){_probe();after()};
+})();
+
+</script>
+<script>
+'use strict';
+// =====================================================================
+// SIDE QUESTS & BOSSES
+// =====================================================================
+const QUEST_INFO={
+  charger:{title:'SIDE QUEST: CHARGER HUNT',icon:'🔌',boss:false,
+    intro:'Their phone is at 1% and dying. Find a charger that FITS the port, sits inside the WATT range, has PD if the phone needs it, and is CERTIFIED. The wrong one is useless, slow, or a small fire.'},
+  case:{title:'SIDE QUEST: CASE CLOSED',icon:'📦',boss:false,
+    intro:'They need a case. It has to match the phone\'s size and camera cutout, in a color they like. Close calls can be talked into it, maybe. The clock is ticking.'},
+  malware:{title:'SIDE QUEST: VIRUS BUSTER',icon:'🦠',boss:false,
+    intro:'Their phone is infested. Tap shady apps and uninstall them. Close pop-ups, but watch for fake X buttons. Do NOT delete their real apps.'},
+  retention:{title:'BOSS: THE CANCELLATION',icon:'😡',boss:true,
+    intro:'This customer is here to cancel everything. Calm them down before they storm out. Find out what actually happened. Maybe they\'re right. Maybe they\'re not. They WILL ask for a manager.'},
+  scam:{title:'BOSS: LOVE ON THE LINE',icon:'💔',boss:true,
+    intro:'This customer wants to buy gift cards for their online sweetheart. It\'s a scam. Find the red flags and gently prove it before they send more money, without losing their trust.'},
+};
+function planDay(d){
+  const p=['sale','sale','sale','sale','sale'],side=['charger','case','malware'];
+  const s1=pick([1,2]);p[s1]=pick(side);
+  if(d>=2&&Math.random()<.6)p[3]=pick(side.filter(x=>x!==p[s1]));
+  if(d>=2)p[4]=pick(['retention','scam']);
+  return p;
+}
+let QS=null;
+const qctx=$('qFace').getContext('2d');qctx.imageSmoothingEnabled=false;
+function startQuest(type){
+  C=makeCustomer();C.done=true;
+  if(type==='scam'){C.p=pick(PERSONAS.filter(p=>['retiree','grandma','contractor','exec','bargain'].includes(p.id)));C.looks=makeLooks(C.p)}
+  if(type==='retention'){C.p=pick(PERSONAS.filter(p=>['exec','bargain','parent','contractor','techbro','tinfoil'].includes(p.id)));C.looks=makeLooks(C.p)}
+  updateTop();renderFile();scene.enter=0;scene.leaving=-1;$('meters').hidden=true;setMenuEnabled(false);
+  const info=QUEST_INFO[type];
+  say('',`*The door chimes. ${C.name} walks in${info.boss?' with the energy of a final boss':' looking stressed'}.*`,'');
+  $('summaryCard').innerHTML=`<h2 style="color:${info.boss?'#ff5a5a':'var(--cyan)'}">${info.icon} ${info.title}</h2>${info.boss?'<p style="font-family:var(--pix);font-size:12px;color:#ff5a5a">⚠ BOSS ENCOUNTER ⚠</p>':''}<p>${info.intro}</p><button class="btn" id="nextBtn">START ▶</button>`;
+  setTimeout(()=>{$('summary').hidden=false;$('nextBtn').onclick=()=>{$('summary').hidden=true;openQuest(type)};$('nextBtn').focus()},900);
+}
+function openQuest(type){
+  initAudio();
+  QS={type,time:0,max:0,timed:false,over:false,quipT:5,meters:[]};
+  $('qTitle').textContent=QUEST_INFO[type].icon+' '+QUEST_INFO[type].title;$('qWho').textContent=C.name.toUpperCase();
+  $('qBody').innerHTML='';$('qBody').className='';$('quest').hidden=false;$('quest').classList.toggle('boss',QUEST_INFO[type].boss);
+  ({charger:setupCharger,case:setupCase,malware:setupMalware,retention:setupRetention,scam:setupScam})[type]();
+  $('qTimer').hidden=!QS.timed;$('qTime').hidden=!QS.timed;renderQMeters();
+}
+function qSay(t){const el=$('qLine');el.textContent=t;el.classList.remove('flash');void el.offsetWidth;el.classList.add('flash');scene.talk=1;setTimeout(()=>scene.talk=0,900)}
+function renderQMeters(){$('qMeters').innerHTML=QS.meters.map(m=>`<div class="meter"><span style="color:${m.col}">${m.label}</span><div class="mbar"><i style="width:${clamp(m.val(),0,100)}%;background:${m.col}"></i></div></div>`).join('')}
+function penalty(sec,msg){QS.time=Math.max(0,QS.time-sec);if(msg)qSay(msg);const el=$('qTime');el.classList.remove('hit');void el.offsetWidth;el.classList.add('hit');sfx.buzz()}
+function finishQuest(win,amount,title,text){
+  if(QS.over)return;QS.over=true;const type=QS.type;$('quest').hidden=true;G.served++;
+  if(win){G.sales+=amount;G.daySales+=amount;G.sold++;scene.mood='sold';scene.cash=1.2;sfx.sale()}else{scene.leaving=0;sfx.walk()}
+  G.log.push({name:C.name,title:QUEST_INFO[type].title,v:win?amount:0,items:[]});updateTop();
+  $('summaryCard').innerHTML=`<h2 style="color:${win?'var(--lime)':'#ff5a5a'}">${esc(title)}${win&&amount?' +'+money(amount):''}</h2><p>${text}</p><button class="btn" id="nextBtn">NEXT CUSTOMER ▶</button>`;
+  setTimeout(()=>{$('summary').hidden=false;$('nextBtn').onclick=()=>{$('summary').hidden=true;nextCustomer()};$('nextBtn').focus()},win?900:1400);
+}
+function questLoop(dt){
+  if(!QS||QS.over||$('quest').hidden)return;
+  if(QS.timed){QS.time-=dt;$('qTimer').firstElementChild.style.width=clamp(QS.time/QS.max*100,0,100)+'%';$('qTimer').classList.toggle('low',QS.time<QS.max*.25);$('qTime').textContent=Math.ceil(Math.max(0,QS.time))+'s';
+    if(QS.time<=0){QS.timeout();return}
+    QS.quipT-=dt;if(QS.quipT<=0&&QS.quips){QS.quipT=rand(6,9);qSay(pick(QS.quips))}}
+  if(QS.tick)QS.tick(dt);
+  scene.mood=QS.mood?QS.mood():'annoyed';
+  // portrait: reuse the scene's customer art, shifted up to frame the head and shoulders
+  const saved=g;g=qctx;qctx.setTransform(1,0,0,1,0,0);qctx.fillStyle='#2a1d48';qctx.fillRect(0,0,72,56);qctx.setTransform(1,0,0,1,0,-36);
+  const e=scene.enter,l=scene.leaving;scene.enter=1;scene.leaving=-1;drawCustomer(36,scene.t);scene.enter=e;scene.leaving=l;qctx.setTransform(1,0,0,1,0,0);g=saved;
+}
+
+// ---------------- CHARGER HUNT ----------------
+const PHONE_SPECS=[{n:'Nova 16',port:'USB-C',min:15,max:27,pd:true},{n:'Nova 11',port:'Lightning',min:10,max:20,pd:false},{n:'Pixelite 6',port:'USB-C',min:10,max:18,pd:false},
+  {n:'Galacta S8',port:'Micro-USB',min:5,max:15,pd:false},{n:'Rugged Rhino R2',port:'MagPin',min:10,max:25,pd:false},{n:'Galacta Fold Z',port:'USB-C',min:25,max:45,pd:true},{n:'BrickPhone Classic',port:'Micro-USB',min:3,max:7,pd:false}];
+const PORTS=['USB-C','Lightning','Micro-USB','MagPin'],PORT_COL={'USB-C':'#3fe0d0','Lightning':'#ffc845','Micro-USB':'#ff8a5a','MagPin':'#c08aff'};
+const BRANDS=['VoltBro','ChargeKing','OEM','Sparky\'s','AmpGod','N0-Name','TotallySafe™','Juicr','ZapCo','Gas Station Special','PowerPuff','Elektro','GenuineOriginal','Amp-ish'];
+const WATTS=[5,7,10,12,15,18,20,25,30,35,45,65,100];
+function setupCharger(){
+  const ph=pick(PHONE_SPECS),n=clamp(12+G.day*3,12,30),list=[];
+  for(let i=0;i<n;i++)list.push({port:Math.random()<.45?ph.port:pick(PORTS),w:pick(WATTS),pd:Math.random()<.5,cert:Math.random()<.8,brand:pick(BRANDS)});
+  const good=()=>{const ws=WATTS.filter(w=>w>=ph.min&&w<=ph.max);return{port:ph.port,w:pick(ws.length?ws:[ph.max]),pd:ph.pd||Math.random()<.5,cert:true,brand:pick(BRANDS)}};
+  const goods=Math.random()<.5?1:2;for(let k=0;k<goods;k++)list[irand(0,n-1)]=good();
+  Object.assign(QS,{timed:true,max:clamp(38-G.day*2.5,16,38),ph,list,
+    quips:['My phone is at 2%.','It\'s at 1%. IT\'S AT 1%!','Is it this one? It\'s this one, right?','My ride is here in three minutes.','*taps foot aggressively*','My whole life is on that phone. And my lunch order.'],
+    mood:()=>QS.time<QS.max*.3?'angry':'annoyed',timeout:()=>finishQuest(false,0,'TOO SLOW','The phone died. So did the sale. They\'re charging it at the coffee shop next door.')});
+  QS.time=QS.max;
+  qSay(`My ${ph.n} is about to die. I just need a charger. Please. Quickly.`);
+  $('qBody').innerHTML=`<div class="spec"><b>📱 ${ph.n}</b><span>PORT: <b style="color:${PORT_COL[ph.port]}">${ph.port}</b></span><span>SAFE RANGE: <b>${ph.min}–${ph.max}W</b></span><span>PD: <b>${ph.pd?'REQUIRED':'not needed'}</b></span></div>
+    <div class="rule">Right port · watts inside the range · PD if required · certified ✔</div><div class="grid chargers" id="cgrid"></div>`;
+  const grid=$('cgrid');
+  list.forEach(c=>{const b=document.createElement('button');b.className='qcard';
+    b.innerHTML=`<span class="port" style="background:${PORT_COL[c.port]}">${c.port}</span><span class="big">${c.w}W</span><span>PD ${c.pd?'✓':'–'}</span><span class="${c.cert?'ok':'warn'}">${c.cert?'✔ CERT':'⚠ NO CERT'}</span><span class="brand">${esc(c.brand)}</span>`;
+    b.onclick=()=>tryCharger(c,b);grid.appendChild(b)});
+}
+function tryCharger(c,b){
+  if(QS.over)return;const ph=QS.ph;b.disabled=true;
+  if(c.port!==ph.port){b.classList.add('bad');penalty(3,pick([`That doesn't even fit. My phone is ${ph.port}.`,'It\'s like trying to put a square peg in a phone.','Nope. Wrong plug. Do you work here?']));return}
+  if(!c.cert){b.classList.add('bad');sfx.walk();finishQuest(false,0,'💥 FRIED!',`You plugged a ${esc(c.brand)} uncertified charger into their ${ph.n}. There was a pop, a smell, and a small cloud. The phone is now a paperweight. The customer is now a 1-star review.`);return}
+  if(c.w>ph.max*1.6){b.classList.add('bad');finishQuest(false,0,'💥 FRIED!',`${c.w} watts into a phone rated for ${ph.max}W. The phone got hot enough to make toast, then stopped being a phone.`);return}
+  if(c.w>ph.max){b.classList.add('bad');penalty(5,'Ow! It\'s hot. Like, too hot. Unplug it!');return}
+  if(c.w<ph.min||(ph.pd&&!c.pd)){b.classList.add('bad');penalty(5,pick(['It says "9 hours remaining." I don\'t have 9 hours. I have 9 minutes.','It\'s charging slower than it\'s dying. That\'s impressive, actually.','The battery went UP one percent. Then down two.']));return}
+  b.classList.add('good');const amt=Math.round(120+QS.time*7);
+  finishQuest(true,amt,'⚡ CHARGED!',`The ${ph.n} lights up. ${esc(C.name)} is so relieved they also grab a backup cable and a car charger. "You're a lifesaver. A tiny, retail lifesaver."`);
+}
+
+// ---------------- CASE CLOSED ----------------
+const CASE_PHONES=[{n:'Nova 16',h:147.6,w:71.6,cam:'dual diagonal'},{n:'Nova 16 Pro',h:149.6,w:71.5,cam:'triple square'},{n:'Pixelite 9a',h:152.1,w:72.9,cam:'bar'},
+  {n:'Galacta S24',h:147.0,w:70.6,cam:'triple vertical'},{n:'Rugged Rhino R5',h:160.2,w:78.0,cam:'single'},{n:'Nova 15',h:147.1,w:71.5,cam:'dual diagonal'}];
+const CAMS=['single','dual diagonal','triple square','triple vertical','bar'],CAM_ICON={'single':'●','dual diagonal':'⁘','triple square':'⣿','triple vertical':'⋮','bar':'▬'};
+const CCOL={pink:'#ff7ab0',black:'#1e1e24',clear:'#cfe8ff',blue:'#4a7ad0',purple:'#9a5ad0',green:'#4ab06a',red:'#d04a4a',gold:'#d8b040'};
+const CSTYLES=['slim','rugged','wallet','glitter','leather','silicone'];
+const STYLE_HATE={slim:'Slim? This will protect my phone from nothing. It\'s a phone sticker.',rugged:'Rugged? I\'m not going to war. I\'m going to brunch.',wallet:'A wallet case? I\'m not carrying a briefcase around my phone.',
+  glitter:'Glitter? It gets EVERYWHERE. I\'ll be finding glitter in 2040.',leather:'Leather? It smells like a car dealership.',silicone:'Silicone? It\'s going to collect lint like a magnet.'};
+function setupCase(){
+  const ph=pick(CASE_PHONES),cols=Object.keys(CCOL),likes=shuffle(cols).slice(0,2),hates=pick(CSTYLES),n=clamp(14+G.day*3,14,32),list=[];
+  const others=CASE_PHONES.filter(p=>p!==ph);
+  for(let i=0;i<n;i++){const r=Math.random();let h,w,cam,label;
+    if(r<.3){h=ph.h+rand(-.2,.2);w=ph.w+rand(-.2,.2);cam=Math.random()<.6?ph.cam:pick(CAMS);label=ph.n}
+    else if(r<.65){h=ph.h+pick([-1,1])*rand(.6,1.4);w=ph.w+pick([-1,1])*rand(.3,1.2);cam=Math.random()<.7?ph.cam:pick(CAMS);label=Math.random()<.5?ph.n+pick([' (fits most)',' / '+pick(others).n,' compatible']):pick(others).n}
+    else{const o=pick(others);h=o.h+rand(-.3,.3);w=o.w+rand(-.3,.3);cam=o.cam;label=o.n}
+    list.push({h:+h.toFixed(1),w:+w.toFixed(1),cam,label,color:pick(cols),style:pick(CSTYLES)})}
+  list[irand(0,n-1)]={h:ph.h,w:ph.w,cam:ph.cam,label:ph.n,color:pick(likes),style:pick(CSTYLES.filter(s=>s!==hates))};
+  Object.assign(QS,{timed:true,max:clamp(45-G.day*2.5,20,45),ph,likes,hates,list,convinces:0,
+    quips:['Do you have it or not?','I\'ve been here so long my phone needs an update.','My friend found one online in 10 seconds.','*sighs in ' + pick(likes) + '*','I don\'t need it to be perfect. Just perfect.'],
+    mood:()=>QS.time<QS.max*.3?'angry':'annoyed',timeout:()=>finishQuest(false,0,'NO SALE','They gave up and bought a case from a kiosk that also sells hermit crabs.')});
+  QS.time=QS.max;
+  qSay(`I need a case for my ${ph.n}. Something ${likes.join(' or ')}. And NOT ${hates}. Please.`);
+  $('qBody').innerHTML=`<div class="spec"><b>📱 ${ph.n}</b><span>SIZE: <b>${ph.h} × ${ph.w} mm</b></span><span>CAMERA: <b>${CAM_ICON[ph.cam]} ${ph.cam}</b></span><span>LIKES: ${likes.map(c=>`<i class="sw" style="background:${CCOL[c]}"></i>${c}`).join(' ')}</span><span>HATES: <b style="color:#ff5a5a">${hates}</b></span></div>
+    <div class="rule">Same size (within 0.4 mm) · same camera cutout · a color they like · not the style they hate</div><div class="grid cases" id="cgrid"></div>`;
+  const grid=$('cgrid');
+  list.forEach(c=>{const b=document.createElement('button');b.className='qcard';
+    b.innerHTML=`<i class="caseart" style="background:${CCOL[c.color]}"><b>${CAM_ICON[c.cam]}</b></i><span class="brand">${esc(c.label)}</span><span class="big">${c.h} × ${c.w}</span><span>${CAM_ICON[c.cam]} ${c.cam}</span><span>${c.color} · ${c.style}</span>`;
+    b.onclick=()=>tryCase(c,b);grid.appendChild(b)});
+}
+function tryCase(c,b){
+  if(QS.over||QS.convincing)return;const ph=QS.ph;
+  const diff=Math.max(Math.abs(c.h-ph.h),Math.abs(c.w-ph.w));
+  if(c.cam!==ph.cam||diff>1.5){b.disabled=true;b.classList.add('bad');penalty(4,c.cam!==ph.cam?pick(['The camera hole is in the wrong place. It\'s covering my camera with... case.','My camera is looking at a wall of plastic now.']):pick(['It won\'t even go on.','That\'s for a different phone. A much bigger, or smaller, different phone.']));return}
+  const issues=[];if(diff>.4)issues.push(c.h>ph.h||c.w>ph.w?'loose':'tight');if(!QS.likes.includes(c.color))issues.push('color');if(c.style===QS.hates)issues.push('style');
+  if(!issues.length){b.classList.add('good');const amt=Math.round(140+QS.time*6);finishQuest(true,amt,'📦 PERFECT FIT!',`It clicks on like it was born there. ${esc(C.name)} loves it so much they add a screen protector. "Finally, someone who listens."`);return}
+  // close call: try to talk them into it
+  QS.convincing=true;b.classList.add('meh');const issue=issues[0];
+  const COMPLAIN={loose:['It wobbles. Like a toddler on ice skates.','There\'s a gap. I could store a sandwich in there.'],tight:['It\'s so tight I can\'t press the buttons.','I need a crowbar to get my phone out of this.'],
+    color:[`${c.color[0].toUpperCase()+c.color.slice(1)}? Do I look like a ${c.color} person to you?`,`I said ${QS.likes.join(' or ')}. This is very much ${c.color}.`],style:[STYLE_HATE[c.style]]};
+  const PITCH={loose:['It\'ll snug up after a day or two.','The extra room actually absorbs drops better.'],tight:['It loosens up after you take it off a few times.','Tight means it will never, ever slip off.'],
+    color:[`${c.color[0].toUpperCase()+c.color.slice(1)} is really in right now.`,'It hides scratches way better than lighter colors.'],style:['Honestly, it\'s way more protective than it looks.','Everyone who buys this one comes back for a second one.']};
+  qSay(pick(COMPLAIN[issue]));
+  const box=document.createElement('div');box.className='convince';box.innerHTML=`<div class="rule">Close, but ${issues.join(' + ')}. Try to convince them?</div>`;
+  [...shuffle(PITCH[issue]).slice(0,2),'Never mind, let me keep looking.'].forEach((t,i)=>{const o=document.createElement('button');o.className='opt';o.innerHTML=`<span><span class="n">▸</span> ${esc(t)}</span>`;
+    o.onclick=()=>{box.remove();QS.convincing=false;if(i===2){b.classList.remove('meh');return}
+      QS.convinces++;const chance=clamp(.62-.15*(issues.length-1)-.12*(QS.convinces-1)+(QS.time/QS.max)*.15,.08,.85);
+      if(Math.random()<chance){const amt=Math.round(90+QS.time*3);finishQuest(true,amt,'📦 SOLD... ISH',`"${esc(pick(['Fine. But only because I\'m tired.','Okay, you\'ve convinced me. Mostly to make you stop.','I guess it\'s... growing on me.']))}" ${esc(C.name)} buys it, reluctantly.`)}
+      else{b.disabled=true;b.classList.add('bad');penalty(5,pick(['Nope. Not buying it. Literally.','Nice try. Keep looking.','That\'s what the last guy said about my haircut.']))}};box.appendChild(o)});
+  $('qBody').prepend(box);box.scrollIntoView({block:'nearest'});
+}
+
+// ---------------- VIRUS BUSTER ----------------
+const LEGIT_APPS=[['💬','Messages'],['🖼️','Photos'],['📷','Camera'],['🗺️','Maps'],['🏦','MyBank'],['✉️','Mail'],['🎵','Music'],['📅','Calendar'],['⛅','Weather'],['⏰','Clock'],['📝','Notes'],['⚙️','Settings'],['📞','Phone'],['🛒','Shopping'],['🧮','Calculator']];
+const BAD_APPS=[['🚀','FreeRAM Boost'],['🔦','Flashlight Pro+'],['🧹','Cleaner Master'],['🎰','W1NN3R!!'],['🔋','Battery Doctor'],['🔳','QR Scanner Gold'],['⛈️','Weather++'],['🏦','MyBank (Real)'],['💬','Messages 2'],['💘','Local Singles'],['💰','CryptoGift'],['🎁','Claim Prize'],['📸','Photoz HD'],['🔒','Totally Safe VPN']];
+const POPS=['⚠️ VIRUS DETECTED! 37 threats found!','🎉 CONGRATS! You won a FREE Nova 27!','Your battery is 99% damaged! Tap to repair.','💘 Local singles want to meet you!','📦 Package undeliverable. Pay $1.99 now.','🧠 Doctors HATE this one weird trick!','Your phone is hacked. Send 0.1 BTC to unlock.','⭐ Rate Cleaner Master 5 stars to continue!','🔥 HOT deals expiring in 0:03!','Your Wi-Fi is slow! Download FastWiFi Pro!'];
+const TIERS={easy:{name:'EASY',bad:3,pop:3.5,maxPop:3,fake:.12,move:0,shuffle:0,reinstall:0,time:45,bonus:150},
+  hard:{name:'HARD',bad:5,pop:2.2,maxPop:5,fake:.3,move:.3,shuffle:12,reinstall:0,time:50,bonus:260},
+  nightmare:{name:'NIGHTMARE',bad:7,pop:1.4,maxPop:7,fake:.4,move:.45,shuffle:7,reinstall:9,time:55,bonus:420},
+  rootkit:{name:'ROOTKIT (good luck)',bad:9,pop:.85,maxPop:9,fake:.5,move:.6,shuffle:4,reinstall:6,time:55,bonus:750}};
+function pickTier(){const d=G.day,w=d<=2?{easy:70,hard:30}:d===3?{easy:30,hard:50,nightmare:20}:{hard:40,nightmare:45,rootkit:15};let r=Math.random()*Object.values(w).reduce((a,b)=>a+b,0);for(const [k,v] of Object.entries(w))if((r-=v)<=0)return k;return'hard'}
+function setupMalware(){
+  const tk=pickTier(),T=TIERS[tk];
+  const bad=shuffle(BAD_APPS).slice(0,T.bad).map(a=>({e:a[0],n:a[1],bad:true})),good=shuffle(LEGIT_APPS).slice(0,20-T.bad).map(a=>({e:a[0],n:a[1],bad:false}));
+  Object.assign(QS,{timed:true,max:T.time,T,tk,apps:shuffle(bad.concat(good)),removed:[],pops:0,popT:1.5,shufT:T.shuffle||1e9,reT:T.reinstall||1e9,sel:null,
+    quips:['Is it fixed? It doesn\'t look fixed.','I only downloaded ONE flashlight app. Maybe six.','It keeps saying I won a phone. Did I win a phone?','My grandson said "don\'t click anything." I clicked everything.'],
+    mood:()=>QS.time<QS.max*.3?'angry':'annoyed',tick:malwareTick,
+    timeout:()=>finishQuest(false,0,'💀 INFECTED',`The phone is still full of junk. ${esc(C.name)} says they'll "just buy a new phone online." From a pop-up ad. Probably.`)});
+  QS.time=QS.max;
+  qSay(pick(['My phone keeps yelling at me that I won things. I never win things.','Every time I open my phone, a casino opens. I don\'t gamble.','Something called "Cleaner Master" is making everything dirtier.']));
+  $('qBody').innerHTML=`<div class="rule">Threat level: <b style="color:${tk==='easy'?'var(--lime)':tk==='hard'?'var(--amber)':'#ff5a5a'}">${T.name}</b> · ${T.bad} shady apps hiding among real ones. Typos and "too good to be true" names are a giveaway.</div>
+    <div class="phone" id="phone"><div class="pscreen" id="pscreen"><div class="apps" id="apps"></div><div class="ubar" id="ubar" hidden></div></div></div>`;
+  renderApps();
+}
+function renderApps(){
+  const box=$('apps');box.innerHTML='';
+  QS.apps.forEach(a=>{const b=document.createElement('button');b.className='app'+(QS.sel===a?' sel':'');b.innerHTML=`<span class="ai">${a.e}</span><span class="an">${esc(a.n)}</span>`;
+    b.onclick=()=>{QS.sel=a;renderApps();showUbar()};box.appendChild(b)});
+}
+function showUbar(){const u=$('ubar'),a=QS.sel;if(!a){u.hidden=true;return}u.hidden=false;u.innerHTML=`<span>${a.e} ${esc(a.n)}</span><button class="ub del">UNINSTALL</button><button class="ub">KEEP</button>`;
+  u.querySelector('.del').onclick=()=>uninstall(a);u.querySelectorAll('.ub')[1].onclick=()=>{QS.sel=null;renderApps();showUbar()}}
+function uninstall(a){
+  QS.sel=null;$('ubar').hidden=true;
+  if(!a.bad){penalty(6,pick([`You deleted ${a.n}?! That had my grandkids\' photos in it!`,`Why would you delete ${a.n}? That's the one app I actually use!`,`${a.n} was REAL! I need that!`]));renderApps();return}
+  QS.apps=QS.apps.filter(x=>x!==a);QS.removed.push(a);sfx.ding();
+  if(!QS.apps.some(x=>x.bad)){const amt=Math.round(QS.T.bonus+QS.time*5);finishQuest(true,amt,'🧼 VIRUS BUSTED!',`Clean phone. No pop-ups. ${esc(C.name)} pays for the cleanup, buys the protection plan, and promises to stop downloading flashlights. (They won't.)`);return}
+  renderApps();
+}
+function spawnPop(){
+  const s=$('pscreen');if(!s)return;const p=document.createElement('div');p.className='pop-ad';const T=QS.T;
+  const fake=Math.random()<T.fake,move=Math.random()<T.move,tiny=Math.random()<.3;
+  p.style.left=rand(2,38)+'%';p.style.top=rand(4,60)+'%';p.style.background=pick(['#ffe14a','#ff6ab0','#6aff8a','#ffffff','#7ad0ff']);
+  p.innerHTML=`<button class="px${tiny?' tiny':''}" aria-label="Close">✕</button><div>${esc(pick(POPS))}</div><button class="pbtn">${pick(['CLAIM NOW','FIX NOW','OK','YES!!','DOWNLOAD'])}</button>`;
+  const x=p.querySelector('.px');let jumps=move?irand(1,3):0;
+  const close=e=>{e.stopPropagation();if(jumps>0){jumps--;p.style.left=rand(2,38)+'%';p.style.top=rand(4,60)+'%';sfx.blip();return}
+    if(fake){p.remove();QS.pops--;spawnPop();spawnPop();qSay(pick(['That made MORE of them!','Oh no, it\'s multiplying.','That X was a lie!']));return}
+    p.remove();QS.pops--;sfx.blip()};
+  x.addEventListener('pointerdown',close);
+  p.querySelector('.pbtn').addEventListener('pointerdown',e=>{e.stopPropagation();spawnPop();spawnPop();qSay('Why would you press that?!')});
+  s.appendChild(p);QS.pops++;
+}
+function malwareTick(dt){
+  const T=QS.T;QS.popT-=dt;if(QS.popT<=0){QS.popT=T.pop*rand(.7,1.3);if(QS.pops<T.maxPop+2)spawnPop()}
+  $('phone').classList.toggle('glitch',QS.pops>=T.maxPop-1&&T.maxPop>3);
+  if(T.shuffle){QS.shufT-=dt;if(QS.shufT<=0){QS.shufT=T.shuffle;QS.apps=shuffle(QS.apps);renderApps()}}
+  if(T.reinstall){QS.reT-=dt;if(QS.reT<=0){QS.reT=T.reinstall;if(QS.removed.length&&QS.pops>=2){const a=QS.removed.pop();QS.apps.splice(irand(0,QS.apps.length),0,a);renderApps();qSay(`${a.n} just reinstalled itself. How?!`);sfx.buzz()}}}
+}
+
+// ---------------- BOSS: THE CANCELLATION ----------------
+const ISSUES=[
+  {id:'fee',open:['You charged me a $35 activation fee! The guy who sold me this SAID it would be waived!','Why is there a $35 "activation fee" on my bill? I was promised no fees. PROMISED.'],
+    right:'Account notes: "Activation fee waiver approved." It was never applied. That one\'s on us.',wrong:'Account notes: "Customer declined waiver promo (requires autopay)." They signed it. Twice.',
+    fix:'I\'m removing that $35 fee right now. You were right, and I\'m sorry.',plan:false},
+  {id:'bill',open:['My bill went up $20 this month and NOBODY told me!','Why is my bill $20 higher? Is this a joke? Is my bill a joke to you?'],
+    right:'A system error ended their discount six months early. Yikes.',wrong:'Their 12-month promo ended right on schedule. The notice went to an email they haven\'t opened since 2014.',
+    fix:'I\'m putting your discount back and crediting the months you lost.',plan:true},
+  {id:'throttle',open:['My internet is slower than dial-up running on a hamster wheel!','I pay for unlimited and my videos load one pixel at a time!'],
+    right:'They\'re on Unlimited, but a glitch flagged them as Basic and throttled them. Oops.',wrong:'They\'re on Basic 5GB. They used 47 GB this month. Mostly cooking videos.',
+    fix:'I found a glitch on your line. I\'ve removed the throttle. You\'re back to full speed.',plan:true},
+  {id:'return',open:['I RETURNED that tablet three months ago and you\'re STILL charging me for it!','Why am I paying for a tablet I gave back?! Do you people steal tablets?'],
+    right:'The return was received... and never processed. It\'s been sitting in a back room.',wrong:'The return was received. The box was, anyway. The tablet was not in the box.',
+    fix:'I\'m processing that return now and refunding every payment since.',plan:false},
+  {id:'calls',open:['My calls drop EVERY time I walk into my kitchen!','I can\'t make a single call from my own house! What am I paying for?!'],
+    right:'The tower near their house has been down for two weeks. There\'s an open repair ticket.',wrong:'Notes from a previous call: their kitchen is in the basement, behind a lead-lined wall. They call it "the bunker."',
+    fix:'There\'s a tower outage near you. I\'m crediting your bill until it\'s fixed and sending you a free signal booster.',plan:false},
+];
+const GARY_HELP=['Gary actually knows what he\'s doing for once. "Let\'s get this taken care of."','Gary appears, nods seriously, and says all the right things. Who IS this man?'];
+const GARY_MEH=['Gary offers them a free keychain. It\'s shaped like a phone. It does not help.','Gary says "Hmm" eleven times, then leaves to "check something." He does not come back.','Gary asks if they\'ve tried turning it off and on again. They have.'];
+const QGARY_BAD=['Gary says "Rules are rules" and walks away eating a burrito.','Gary calls them "buddy." They are not his buddy.','Gary says "Well, technically..." and the room gets ten degrees hotter.'];
+function setupRetention(){
+  const is=pick(ISSUES);
+  Object.assign(QS,{timed:false,issue:is,right:Math.random()<.5,anger:rand(68,82),demands:0,pending:false,ignored:0,looked:false,turns:0,credits:0,creditUses:0,used:{},
+    mood:()=>QS.anger>70?'angry':QS.anger>40?'annoyed':QS.anger>20?'neutral':'happy'});
+  QS.meters=[{label:'ANGER',col:'#ff5a5a',val:()=>QS.anger},{label:'TURNS',col:'#a99cc8',val:()=>(14-QS.turns)/14*100}];
+  qSay(pick(is.open)+' I want to CANCEL. Everything.');
+  renderRetention();
+}
+function renderRetention(){
+  const acts=[];const A=(id,t,fn,show=true)=>{if(show)acts.push({id,t,fn})};
+  A('vent','Let them vent',()=>{if(QS.anger>60){chA(-5);return pick(['*nods silently while they yell about 2019*','*makes sympathetic noises*'])}chA(3);return'...Are you even listening?'});
+  A('sorry','Apologize and empathize',()=>{const n=(QS.used.sorry||0);chA(n===0?-12:n===1?-5:5);return n>=2?'You keep saying sorry. Sorry doesn\'t pay my bill.':pick(['...Thank you. At least someone admits this is annoying.','Okay. Well. I appreciate that.'])});
+  A('look','Look up their account',()=>{QS.looked=true;chA(4);return'*taps keyboard* ...Why is this taking so long? Do you have to type with one finger?'},!QS.looked);
+  A('fix','Fix the problem and own the mistake',()=>{chA(-38);return'...Oh. Okay. Huh. Nobody\'s ever just FIXED something before.'},QS.looked&&QS.right&&!QS.used.fix);
+  A('explain','Calmly explain what actually happened',()=>{if(QS.anger>72){chA(8);return'Are you calling me a LIAR?'}chA(-22);return pick(['...Huh. I did sign that, didn\'t I. Ugh.','Okay. I didn\'t know that. That\'s... fair.'])},QS.looked&&!QS.right&&!QS.used.explain);
+  A('policy','Explain the policy',()=>{chA(12);return'You don\'t even know what happened! You\'re just reading a script!'},!QS.looked&&!QS.used.policy);
+  A('c25','Offer a $25 credit',()=>credit(25,10));
+  A('c75','Offer a $75 credit',()=>credit(75,20));
+  A('plan','Offer a better plan',()=>{if(QS.issue.plan){chA(-14);return'A better plan for less? ...Keep talking.'}chA(5);return'A new plan won\'t fix THIS. Were you even listening?'},!QS.used.plan);
+  A('gary','Get the manager (Gary)',gary);
+  A('corp','Blame corporate',()=>{const n=QS.used.corp||0;chA(n?7:-8);return n?'You already blamed corporate. Who\'s corporate? Is it you?':'Ugh, corporate. Fine. It\'s not YOUR fault.'});
+  A('calm','Tell them to calm down',()=>{chA(22);return'DON\'T. TELL ME. TO CALM DOWN.'},!QS.used.calm);
+  const notes=QS.looked?`<div class="notes">🖥 ${esc(QS.right?QS.issue.right:QS.issue.wrong)}<br><b style="color:${QS.right?'var(--lime)':'var(--amber)'}">${QS.right?'They\'re right. Fix it.':'They\'re wrong, but careful how you say it.'}</b></div>`:'';
+  const dem=`<div class="rule">Manager demands ignored: <b style="color:#ff5a5a">${'✕'.repeat(QS.ignored)}${'○'.repeat(3-QS.ignored)}</b>${QS.pending?' · <b style="color:var(--amber)">They just asked for a manager!</b>':''}${QS.credits?` · Credits given: ${money(QS.credits)}`:''}</div>`;
+  $('qBody').innerHTML=dem+notes+'<div class="acts" id="acts"></div>';
+  acts.forEach((a,i)=>{const b=document.createElement('button');b.className='opt';b.innerHTML=`<span><span class="n">${i+1}</span> ${esc(a.t)}</span>`;b.onclick=()=>retTurn(a);$('acts').appendChild(b)});
+}
+function chA(d){QS.anger=clamp(QS.anger+d,0,100)}
+function credit(amt,eff){QS.creditUses++;QS.credits+=amt;if(QS.creditUses>2){chA(6);return'Are you trying to BRIBE me? ...How much are we talking?'}chA(-eff);return amt>50?'$75? ...Okay, that\'s a start.':'$25? That\'s it? ...Fine, it\'s something.'}
+function gary(){
+  QS.pending=false;sfx.chime();const r=Math.random(),help=QS.looked?.5:.25;
+  if(r<help){chA(-20);return'🧔 '+pick(GARY_HELP)}if(r<help+.4){chA(QS.used.gary?4:-2);return'🧔 '+pick(GARY_MEH)}chA(15);return'🧔 '+pick(QGARY_BAD);
+}
+function retTurn(a){
+  if(QS.over)return;QS.turns++;
+  const wasPending=QS.pending;let line=a.fn();QS.used[a.id]=(QS.used[a.id]||0)+1;
+  if(wasPending&&a.id!=='gary'){QS.ignored++;chA(6);line+=` ${pick(['And I ASKED for your MANAGER.','I said MANAGER.','Did you hear me? MAN. A. GER.'])}`;QS.pending=false}
+  if(QS.anger>35&&a.id!=='gary'&&!QS.pending&&Math.random()<.35){QS.pending=true;QS.demands++;line+=' '+pick(['I want to speak to your MANAGER.','Get me your manager. Now.','Is there someone above you? Someone smarter?'])}
+  qSay(line);sfx.blip();renderQMeters();
+  if(QS.ignored>=3){finishQuest(false,0,'🚪 STORMED OUT','"I asked for a manager THREE TIMES." They cancel all five lines on their way out the door, loudly, while filming you.');return}
+  if(QS.anger<=15){const amt=Math.max(400,1800-QS.credits*4);finishQuest(true,amt,'🤝 ACCOUNT SAVED!',`"Fine. I'll stay. But I'm telling my sister-in-law about this." ${esc(C.name)} keeps all their lines${QS.credits?` (you gave ${money(QS.credits)} in credits)`:''}. Gary takes credit for it at the team meeting.`);return}
+  if(QS.anger>=100){finishQuest(false,0,'❌ CANCELED','They cancel everything, port their numbers to the competitor, and leave a review titled "NEVER AGAIN (ESPECIALLY GARY)."');return}
+  if(QS.turns>=14){finishQuest(false,0,'⌛ OUT OF TIME','"I\'ve been here 45 minutes. I\'m canceling out of principle." They leave. The principle remains.');return}
+  renderRetention();
+}
+
+// ---------------- BOSS: LOVE ON THE LINE ----------------
+const SCAM={
+  girl:['Natalia','Svetlana','Isabella','Anastasia','Dr. Jessica','Bella','Valentina'],boy:['Captain James','Dr. Richard','General Mark','Antonio','Sergeant Brad'],
+  job:['an oil rig engineer in the North Sea','a UN doctor overseas','a model in Milan','a general stationed overseas','a crypto investor in Dubai','a ballerina in Monaco','a deep-sea treasure diver'],
+  met:['on Facebook','in a word-game app','on LinkedIn, weirdly','when they texted the wrong number','in the comments of a fishing video','in a cooking forum'],
+  need:['a plane ticket to come visit me','customs fees to release a gold inheritance','a hospital bill','visa paperwork','a new phone because theirs "broke"','a lawyer to unfreeze their bank account'],
+  texts:['Babe, customs said $300 more 🥺','Hurry my love, the airport closes soon ✈️❤️','Don\'t tell the store people about us 😘','Why are you taking so long? Don\'t you love me? 💔','The cards didn\'t work. Can you send them again? 😢','My battery is low, just send the codes 🙏'],
+};
+const FLAGS={
+  fastlove:{q:'meet',t:'Said "I love you" after three days',v:12,say:'You\'ve known them three weeks and they said "I love you" on day three. That\'s a script, not a love story.'},
+  novideo:{q:'video',t:'Never once video chatted',v:18,say:'In all this time, you\'ve never seen them on video? Not once? Every phone has a camera.'},
+  sentbefore:{q:'money',t:'Money "never arrives," so you send it again',v:22,say:'You sent money and it "didn\'t arrive," so they need it again? That\'s the oldest trick there is.'},
+  giftcards:{q:'cards',t:'Only accepts gift cards',v:20,say:'Nobody pays customs or hospitals in gift cards. Only scammers want gift card codes. That\'s why they\'re untraceable.'},
+  secret:{q:'family',t:'Wants it kept secret from family',v:14,say:'They asked you to hide this from your family? People who love you don\'t ask you to hide them.'},
+  photo:{q:'photo',t:'Photos look like a magazine cover',v:10,say:'These photos look professional. Like, "photo shoot" professional.'},
+};
+function setupScam(){
+  const boy=Math.random()<.2;
+  Object.assign(QS,{timed:false,partner:pick(boy?SCAM.boy:SCAM.girl),pron:boy?['he','him','his','boyfriend']:['she','her','her','girlfriend'],job:pick(SCAM.job),met:pick(SCAM.met),need:pick(SCAM.need),
+    sent:irand(18,90)*100,ask:irand(5,20)*100,denial:rand(92,100),patience:72,revealed:[],used:{},pointed:{},empathy:0,turns:0,log:[],
+    mood:()=>QS.patience<25?'angry':QS.denial<40?'neutral':'happy'});
+  QS.meters=[{label:'DENIAL',col:'#ff7ab0',val:()=>QS.denial},{label:'PATIENCE',col:'#ffc845',val:()=>QS.patience}];
+  qSay(`Hi! I need $${QS.ask.toLocaleString()} in gift cards, please. It's for my ${QS.pron[3]}, ${QS.partner}. ${QS.pron[0][0].toUpperCase()+QS.pron[0].slice(1)}'s ${QS.job}. We're in love. 😊`);
+  renderScam();
+}
+function renderScam(){
+  const P=QS.pron,acts=[];const A=(id,t,fn,show=true)=>{if(show)acts.push({id,t,fn})};
+  A('meet','Ask how they met',()=>reveal(['fastlove'],`We met ${QS.met} three weeks ago. ${P[0][0].toUpperCase()+P[0].slice(1)} said "I love you" on day three. That's how strong it is!`),!QS.used.meet);
+  A('video','Ask if they\'ve ever video chatted',()=>reveal(['novideo'],`Not yet. ${P[2][0].toUpperCase()+P[2].slice(1)} camera is always broken. Or the internet is bad. Or it's raining. It's a lot of rain.`),!QS.used.video);
+  A('money','Ask what the money is for',()=>reveal(['sentbefore'],`It's for ${QS.need}. I already sent $${QS.sent.toLocaleString()}, but ${P[0]} says it never arrived, so I have to send it again.`),!QS.used.money);
+  A('cards','Ask why it has to be gift cards',()=>reveal(['giftcards'],`${P[0][0].toUpperCase()+P[0].slice(1)} says gift cards are faster. I just scratch off the back and text ${P[1]} the numbers. Easy!`),!QS.used.cards);
+  A('family','Ask if their family knows',()=>reveal(['secret'],`${P[0][0].toUpperCase()+P[0].slice(1)} asked me not to tell anyone. My family wouldn't understand our love.`),!QS.used.family);
+  A('photo','Ask to see a picture',()=>reveal(['photo'],`Isn't ${P[0]} beautiful? Look. Like a magazine cover. (It is literally a magazine cover.)`),!QS.used.photo);
+  A('empathy','Empathize: "They clearly mean a lot to you"',()=>{QS.empathy=Math.min(2,QS.empathy+1);chP(10);return pick(['They do. Nobody\'s talked to me like this in a long time.','Thank you. Everyone else just laughs at me.'])},!QS.used.empathy||QS.used.empathy<2);
+  QS.revealed.forEach(f=>A('pt_'+f,'Point out: '+FLAGS[f].t,()=>pointOut(f),!QS.pointed[f]));
+  A('reverse','Reverse image search their photo',()=>{const d=ev(28);chD(-d);chP(-4);return`*searching...* That's Ingrid Halvorsen. Weather presenter. Norwegian Channel 4. Married, three kids. ...That's... ${QS.revealed.length>3?'that can\'t be right.':'probably a coincidence?'}`},QS.revealed.includes('photo')&&!QS.used.reverse);
+  A('call','Suggest a video call, right now',()=>{const d=ev(22);chD(-d);return`*calls ${QS.partner}* ...Declined. *ding* "Camera broke again babe 😢 just send the cards and I'll call tomorrow ❤️" ...Again with the camera.`},QS.revealed.includes('novideo')&&!QS.used.call);
+  A('sign','Show them the scam warning on the gift card rack',()=>{chD(-ev(10));return'"Scammers will ask you to pay with gift cards." ...Huh. That\'s a weird coincidence.'},!QS.used.sign);
+  A('blunt','Tell them flat out: "You\'re being scammed"',()=>{chD(14);chP(-12);return pick([`How DARE you. You don't know ${P[1]} like I do!`,'You sound just like my sister. She\'s wrong too.'])});
+  A('sell','Just sell them the gift cards',()=>'__SELL__');
+  const flags=QS.revealed.length?`<div class="notes">🚩 Red flags found: ${QS.revealed.map(f=>`<b>${esc(FLAGS[f].t)}</b>`).join(' · ')}</div>`:'<div class="rule">Ask questions to find red flags, then point them out. Empathy makes your evidence land harder.</div>';
+  const log=QS.log.length?`<div class="texts">${QS.log.slice(-2).map(t=>`<div class="bubble">💬 ${esc(QS.partner)}: ${esc(t)}</div>`).join('')}</div>`:'';
+  $('qBody').innerHTML=log+flags+'<div class="acts" id="acts"></div>';
+  acts.forEach((a,i)=>{const b=document.createElement('button');b.className='opt'+(a.id==='sell'?' danger':'');b.innerHTML=`<span><span class="n">${i+1}</span> ${esc(a.t)}</span>`;b.onclick=()=>scamTurn(a);$('acts').appendChild(b)});
+}
+function chD(d){QS.denial=clamp(QS.denial+d,0,100)}
+function chP(d){QS.patience=clamp(QS.patience+d,0,100)}
+function ev(base){const defensive=QS.denial>80&&QS.empathy===0;return base*(1+.25*QS.empathy)*(defensive?.5:1)}
+function reveal(fs,line){fs.forEach(f=>{if(!QS.revealed.includes(f))QS.revealed.push(f)});chP(-5);return line}
+function pointOut(f){QS.pointed[f]=1;const F=FLAGS[f],defensive=QS.denial>80&&QS.empathy===0;chD(-ev(F.v));if(defensive){chP(-6);return F.say+` → "You don't know ${QS.pron[1]} like I do!"`}
+  return F.say+' → '+pick(['"...Okay, that IS strange."','"I... hadn\'t thought about it like that."','"There\'s probably a good reason. Right? ...Right?"'])}
+function scamTurn(a){
+  if(QS.over)return;QS.turns++;let line=a.fn();QS.used[a.id]=(QS.used[a.id]||0)+1;
+  if(line==='__SELL__'){finishQuest(false,0,'💸 YOU SOLD THE GIFT CARDS',`$${QS.ask.toLocaleString()} in gift cards, straight to a scammer. Commission: ${money(QS.ask*.02)}. Your conscience: -100. ${esc(C.name)} will be back next week for more.`);return}
+  chP(-3);
+  if(QS.turns%3===0){const t=pick(SCAM.texts);QS.log.push(t);if(QS.denial<55){chD(-6);line+=` *phone buzzes* "${t}" ...That's weird, right? Why is ${QS.pron[0]} always in such a hurry?`}else{chD(4);line+=` *phone buzzes* "${t}" See? ${QS.pron[0][0].toUpperCase()+QS.pron[0].slice(1)} needs me!`}}
+  qSay(line);sfx.blip();renderQMeters();
+  if(QS.denial<=0){finishQuest(true,1400,'💔→❤️ SCAM BUSTED',`"...${esc(QS.partner)} isn't real, are they?" A long pause. "Thank you. I feel so stupid." YOU: "You're not stupid. These people are professionals." They report the scammer, block the number, call their family, and buy a new phone with a new number. They hug you on the way out. Gary is confused but supportive.`);return}
+  if(QS.patience<=0){finishQuest(false,0,'🚪 THEY LEFT','"I\'m going to the gas station. THEY sell gift cards without the lecture." You did your best. Sometimes people aren\'t ready to hear it.');return}
+  if(QS.turns>=18){finishQuest(false,0,'⌛ OUT OF TIME',`${esc(QS.partner)} calls (audio only, obviously) and they rush out to "handle it at the bank."`);return}
+  renderScam();
+}
+
+// quest loop runs alongside the main scene loop
+(function ql(){let lt=performance.now();function f(now){const dt=Math.min(.05,(now-lt)/1000);lt=now;questLoop(dt);requestAnimationFrame(f)}requestAnimationFrame(f)})();
+addEventListener('keydown',e=>{if(!QS||QS.over||$('quest').hidden||!$('summary').hidden)return;if(/^[1-9]$/.test(e.key)){const b=[...document.querySelectorAll('#qBody .acts .opt')][+e.key-1];if(b)b.click()}});
+
 </script>
 </body>
 </html>
